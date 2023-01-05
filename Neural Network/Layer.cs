@@ -22,6 +22,12 @@ public class Layer
             Neurons[i].Activate();
     }
 
+    public void Train(float rate)
+    {
+        for (int i = 0; i < Neurons.Length; ++i)
+            Neurons[i].Train(rate);
+    }
+
     public void SetActivationFunction(Activation activation)
     {
         for (int i = 0; i < Neurons.Length; ++i)

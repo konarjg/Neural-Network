@@ -9,6 +9,7 @@ public class Neuron
     public Activation ActivationFunction { get; set; }
     public float Activation { get; set; }
     public Connection[] Connections { get; private set; }
+    private Random Random = new Random();
 
     public Neuron(float value, Layer left)
     {
@@ -19,7 +20,7 @@ public class Neuron
             Connections = new Connection[left.Neurons.Length];
 
             for (int i = 0; i < Connections.Length; ++i)
-                Connections[i] = new Connection(left.Neurons[i], 0.1f, 0f);
+                Connections[i] = new Connection(left.Neurons[i], 1f, 0f);
         }
         else
             Connections = new Connection[0];
@@ -33,5 +34,11 @@ public class Neuron
             val += Connections[i].PassThrough();
 
         Activation = ActivationFunctions.Activate(val, ActivationFunction);
+    }
+
+    public void Train(float rate)
+    {
+        for (int i = 0; i < Connections.Length; ++i)
+            Connections[i].Train(rate);
     }
 }

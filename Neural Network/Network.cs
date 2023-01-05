@@ -23,6 +23,18 @@ public class Network
             Hidden[i].SetActivationFunction(activationFunction);
     }
 
+    public void Train(float rate, float[] input, float[] expected)
+    {
+        Evaluate(input);
+
+        Output.Train(rate);
+
+        for (int i = 0; i < Hidden.Length; ++i)
+            Hidden[i].Train(rate);
+
+        Input.Train(rate);
+    }
+
     public float[] Evaluate(params float[] input)
     {
         if (input.Length != Input.Neurons.Length)
