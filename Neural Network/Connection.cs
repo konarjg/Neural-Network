@@ -21,4 +21,10 @@ public class Connection
     {
         return Weight * Source.Activation + Bias;
     }
+
+    public void Train(float rate)
+    {
+        Weight -= rate * Source.Activation;
+        Bias -= rate;
+    }
 }
